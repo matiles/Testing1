@@ -1,0 +1,367 @@
+<!--
+--Description: A primitive common memory game.
+--Date created: 08-09-13                          _
+--Creator: |\/|  __  _|_  _|_  |_  |`` |  |      /_\
+		   |  | |__|  |    |   | | |.. |  |     |   |
+		   |  |     \ |    |   | | |__ |/\|  .  |   |
+		   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8" />
+	<title>Memory tiles</title>
+	<link rel="stylesheet" href="memory.css">
+</head>
+
+<body>
+	<div id="container">
+	
+		<h1>Memory Game</h1>
+	
+		<div id="square_container">
+		
+			<div id="first_row">
+				<div class="squares" alt="1" id="1"></div>
+				<div class="squares" alt="2" id="1"></div>
+				<div class="squares" alt="3" id="1"></div>
+				<div class="squares" alt="4" id="1"></div>
+				<div class="squares" alt="5" id="1"></div>
+			</div>
+		
+			<div id="second_row">
+				<div class="squares" alt="1" id="2"></div>
+				<div class="squares" alt="2" id="2"></div>
+				<div class="squares" alt="3" id="2"></div>
+				<div class="squares" alt="4" id="2"></div>
+				<div class="squares" alt="5" id="2"></div>
+			</div>
+		
+			<div id="third_row">
+				<div class="squares" alt="1" id="3"></div>
+				<div class="squares" alt="2" id="3"></div>
+				<div class="squares" alt="3" id="3"></div>
+				<div class="squares" alt="4" id="3"></div>
+				<div class="squares" alt="5" id="3"></div>
+			</div>
+		
+			<div id="fourth_row">
+				<div class="squares" alt="1" id="4"></div>
+				<div class="squares" alt="2" id="4"></div>
+				<div class="squares" alt="3" id="4"></div>
+				<div class="squares" alt="4" id="4"></div>
+				<div class="squares" alt="5" id="4"></div>
+			</div>
+			
+		</div>
+		
+			<div id="square_container2">
+				<h1 id="start_button">Start</h1>
+				<h1 id="points">Points: 0</h1>
+				<h1 id="check_button">Check</h1>
+			</div>
+	
+	</div>
+
+	<script src="js_games/jquery-1.7.2.min.js"></script>
+	<script>
+	
+		var points = 0; // keeps track of points
+		
+		var show_answer = function(){
+		
+			$('.squares').fadeTo('slow', 1); //we could use children() as well i believe
+			
+			var i = 0;
+			var j = 0;
+			var x = 3;
+			if(points>5) { x=4; }
+			
+			while(i <= x)
+			{
+				if(unsort_rand_rows[i] == 1)
+				{
+					$('#first_row div').each(function() {
+						var col = $(this).attr('alt');
+						
+						if(unsort_rand_col[j] == col)
+						{		
+							$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+						}
+						/*
+						var x;
+						jQuery.each(random_columns, function() {
+							if(this == col)
+							{
+								x = true;
+							}
+							else { x = false; }
+						});
+						if(x)
+						{
+							$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+						}
+						*/
+					});
+				}
+				if(unsort_rand_rows[i]==2)
+				{
+					$('#second_row div').each(function() {
+						var col = $(this).attr('alt');
+						
+						if(unsort_rand_col[j] == col)
+						{
+							$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+						}
+						/*
+						var x;
+						jQuery.each(random_columns, function() {
+							if(this == col)
+							{
+								x = true;
+							}
+							else { x = false; }
+						});
+						if(x)
+						{
+							$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+						}
+						*/
+					});
+				}
+				if(unsort_rand_rows[i]==3)
+				{
+					$('#third_row div').each(function() {
+						var col = $(this).attr('alt');
+						
+						if(unsort_rand_col[j] == col)
+						{
+							$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+						}
+						/*
+						var x;
+						jQuery.each(random_columns, function() {
+							if(this == col)
+							{
+								x = true;
+							}
+							else { x = false; }
+						});
+						if(x)
+						{
+							$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+						}
+						*/
+					});
+				}
+				if(unsort_rand_rows[i]==4)
+				{
+					$('#fourth_row div').each(function() {
+						var col = $(this).attr('alt');
+						
+						if(unsort_rand_col[j] == col)
+						{
+							$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+						}
+						/*
+						var x;
+						jQuery.each(random_columns, function() {
+							if(this == col)
+							{
+								x = true;
+								$('#fourth_row div').children("div")
+							}
+							else { x = false; }
+						});
+						if(x)
+						{
+							$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+						}
+						*/
+					});
+				}
+				++j;
+				++i;
+			}
+		}
+		
+		var clear_arrays = function(sort_rowarray1, rowarray2, sort_colarray3, colarray4, unsort_row, unsort_col) {
+			while(sort_rowarray1.length)
+			{
+				sort_rowarray1.pop();
+				rowarray2.pop();
+				unsort_row.pop();
+			}
+			while(sort_colarray3.length)
+			{
+				sort_colarray3.pop();
+				colarray4.pop();
+				unsort_col.pop();
+			}
+		}
+		
+		var unsort_rand_rows = [];
+		var unsort_rand_col = [];
+		
+		var random_rows = [];
+		var random_columns = [];
+		
+		var random_square = function(){
+		
+			var randrow = Math.floor(Math.random()*4 + 1);//Ill get numbers 1-4
+			var randcolumn = Math.floor(Math.random()*5 + 1);//will get nembers 1-5
+			
+			unsort_rand_rows.push(randrow);
+			unsort_rand_col.push(randcolumn);
+			
+			random_rows.push(randrow);
+			random_columns.push(randcolumn);
+			
+			if(randrow == 1)
+			{
+				//$('#first_row div').css('background-color','violet');   // only if you want whole row violet
+				$('#first_row div').each(function() {
+					var col = $(this).attr('alt')
+					if(col==randcolumn)
+					{
+						//$(this).css('background-color','violet');
+						
+						//$(this).css('background-color','violet').delay(3000).fadeTo('slow', 0);
+						
+						$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+					}
+				});
+			}
+			if(randrow==2)
+			{
+				$('#second_row div').each(function() {
+					var col = $(this).attr('alt')
+					if(col==randcolumn)
+					{
+						//$(this).css('background-color','violet');
+						
+						//$(this).delay(3000).css('background-color','red');
+						
+						$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+					}
+				});
+			}
+			if(randrow==3)
+			{
+				$('#third_row div').each(function() {
+					var col = $(this).attr('alt')
+					if(col==randcolumn)
+					{
+						//$(this).css('background-color','violet');
+						
+						$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+					}
+				});
+			}
+			if(randrow==4)
+			{
+				$('#fourth_row div').each(function() {
+					var col = $(this).attr('alt')
+					if(col==randcolumn)
+					{
+						//$(this).css('background-color','violet');
+						
+						$(this).fadeTo('slow', .6).delay(1000).fadeTo('slow', 1);
+					}
+				});
+			}
+		}
+		
+		var square_chosen_col = [];
+		var square_chosen_row = [];
+	
+		$(document).ready(function() {
+		
+			$('.squares').dblclick(function(/*evt*/) {
+				//evt.preventDefault();    when I double click I want to try to prevent from showing highlighting.
+				$(this).fadeTo('slow', .6);
+				var choose_col = $(this).attr('alt');
+				var choose_row = $(this).attr('id');
+				
+				square_chosen_col.push(choose_col);
+				square_chosen_row.push(choose_row);
+			});// end double click for user selection
+			
+			$('#start_button').click(function() {
+				$('.squares').fadeTo('slow', 1);// don't really need this code.
+				clear_arrays(random_rows, square_chosen_row, random_columns, square_chosen_col, unsort_rand_rows, unsort_rand_col);
+				var loops = 4;
+				//could do a switch statement for if they get to ten  15 and so on.
+				if(points > 5) { loops = 5; }
+				while(loops)
+				{
+					random_square();
+					--loops;
+				}
+			}); // end click of start button
+			
+			$('#check_button').click(function() {
+			
+				//unsort_rand_rows = random_rows;
+				//unsort_rand_col = random_columns;
+				
+				var array_size = 4;
+				
+				if(points>5) {array_size=5;}
+			
+				random_rows.sort();
+				random_columns.sort();
+				
+				square_chosen_row.sort();
+				square_chosen_col.sort();
+
+				var correct_times_row = 0;
+				var correct_times_col = 0;
+				
+				var counter1 = 0;
+				while(counter1 < square_chosen_row.length)
+				{
+					if(square_chosen_row[counter1] != random_rows[counter1])
+					{
+						//do nothing
+					}
+					else
+					{
+						++correct_times_row;
+					}
+					++counter1;
+				}
+				
+				var counter2 = 0;
+				while(counter2 < square_chosen_col.length)
+				{
+					if(square_chosen_col[counter2] != random_columns[counter2])
+					{
+						//do nothing
+					}
+					else
+					{
+						++correct_times_col;
+					}
+					++counter2;
+				}
+				
+				if(correct_times_row == array_size && correct_times_col == array_size)
+				{
+					alert("you got some skills!!");
+					++points;
+				}
+				else
+				{
+					alert("you need to play this game more often");
+					//fade_out_squares_clicked();
+					show_answer();
+					--points;
+				}
+				$("#points").text("Points: " + points); // replaces text to update points
+			});// end click of check button
+		});// end ready
+	</script>
+</body>

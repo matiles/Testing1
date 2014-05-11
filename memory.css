@@ -1,0 +1,60 @@
+#container {
+	margin: 0;
+	padding: 0;
+}
+
+#container h1{
+	text-align: center;
+	margin: 0;
+}
+
+#square_container {
+	margin: 60px;
+	padding: 20px;
+	border: 3px solid teal;
+	border-radius: 3px;
+	width: 616px;
+	float:  left;
+}
+
+#square_container2 {
+	margin: 60px;
+	padding: 20px;
+	border: 3px solid peru;
+	border-radius: 3px;
+	width: 380px;
+	height: 500px;
+	float:  right;
+}
+
+#first_row  {
+	display: inline-block;
+}
+
+#second_row  {
+	display: inline-block;
+}
+
+#third_row  {
+	display: inline-block;
+}
+
+#fourth_row  {
+	display: inline-block;
+}
+
+.squares {
+	display: inline-block;
+	width: 120px;
+	height: 120px;
+	background-color: rgba(0,100,243, 1);
+}
+
+#start_button {
+
+}
+
+#check_button {
+	position: relative;
+	top: 400px;
+}
